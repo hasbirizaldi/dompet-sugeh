@@ -20,6 +20,7 @@ createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/logout" element={<Logout />} />
 
           {/* protected routes */}

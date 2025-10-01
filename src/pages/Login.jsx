@@ -74,8 +74,8 @@ const Login = () => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user_id", data.user.id);
-        navigate("/");
         mode ? await alertSuccess("Anda berhasil masuk") : await alertSuccess("Pendaftaran anda berhasil");
+        navigate("/");
       } else {
         await alertError("Terjadi kesalahan");
       }
