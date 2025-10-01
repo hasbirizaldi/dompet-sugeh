@@ -332,14 +332,14 @@ const Transaction = () => {
               <IoSearch className="absolute right-4 top-2 text-lg text-gray-500" />
             </div>
           </div>
-          <div className="flex items-center gap-4 mb-4">
-            <button onClick={() => setShowModal(true)} className="flex justify-center items-center gap-1 bg-blue-600 text-white py-1.5 px-4 cursor-pointer hover:bg-blue-800 transition rounded-lg font-semibold">
+          <div className="flex items-center lg:gap-4 gap-2 mb-4">
+            <button onClick={() => setShowModal(true)} className="flex justify-center items-center gap-1 bg-blue-600 text-white py-1.5 lg:px-4 px-3 cursor-pointer hover:bg-blue-800 transition rounded-lg font-semibold text-sm">
               <FaPlusCircle />
-              Tambah Transaksi
+              <span>Tambah Transaksi</span>
             </button>
             <div className="relative inline-block text-left">
               {/* Button */}
-              <button onClick={exportToExcel} className="flex items-center gap-2 bg-slate-600 text-white py-1.5 px-4 rounded-lg font-semibold hover:bg-slate-700 transition cursor-pointer">
+              <button onClick={exportToExcel} className="flex items-center gap-1 bg-slate-600 text-white py-1.5 lg:px-4 px-3 rounded-lg font-semibold hover:bg-slate-700 transition cursor-pointer text-sm">
                 <FaFileExcel className="text-white" /> Export Excel
               </button>
             </div>

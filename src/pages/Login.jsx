@@ -51,40 +51,31 @@ const Login = () => {
 
     try {
       const url = mode ? "https://brewokode.space/api/login" : "https://brewokode.space/api/register";
-
-      const body = mode
-        ? { email, password }
-        : {
-            name,
-            email,
-            password,
-            password_confirmation: confirmPassword,
-          };
-
+      const body = mode ? { email, password } : { name, email, password, password_confirmation: confirmPassword };
       const response = await axios.post(url, body, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
       });
 
       const data = response.data;
 
-      // Simpan token
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user_id", data.user.id);
-        mode ? await alertSuccess("Anda berhasil masuk") : await alertSuccess("Pendaftaran anda berhasil");
-        navigate("/");
+
+        // tampilkan alert **sebelum navigate**
+        if (mode) {
+          await alertSuccess("Anda berhasil masuk");
+        } else {
+          await alertSuccess("Pendaftaran anda berhasil");
+        }
+
+        // kemudian baru navigate
+        navigate("/", { replace: true });
       } else {
         await alertError("Terjadi kesalahan");
       }
     } catch (err) {
-      if (err.response) {
-        await alertError("Email atau password anda tidak valid!");
-      } else {
-        await alertError("Mumet");
-      }
+      await alertError(err.response ? "Email atau password anda tidak valid!" : "Mumet");
     } finally {
       setLoading(false);
     }
@@ -93,7 +84,7 @@ const Login = () => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("user_id");
     if (token && userId) {
-      navigate("/"); // kalau sudah login, lempar ke dashboard
+      navigate("/", { replace: true }); // replace biar tidak bikin stack navigation
     }
   }, [navigate]);
   return (

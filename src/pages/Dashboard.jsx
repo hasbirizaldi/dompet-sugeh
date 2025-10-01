@@ -110,7 +110,7 @@ const Dashboard = () => {
   return (
     <div className="lg:p-6 space-y-6 mb-3">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">Dashboard</h1>
-      <div className="flex flex-col gap-3 gap-1 bg-white shadow-md px-4 pt-6 pb-10 rounded">
+      <div className="flex flex-col gap-3 bg-white shadow-md px-3 lg:px-4 pt-6 pb-10 rounded">
         {/* Kartu Statistik */}
         <div>
           <div className="flex flex-row gap-2 lg:gap-4">
@@ -171,13 +171,13 @@ const Dashboard = () => {
               </button>
             </div>
           </div>
-          <div className="mt-3">
+          <div className="mt-3 mb-1">
             {month === "" && year === "" ? (
-              <h3 className="font-semibold text-gray-800 text-lg">Semua Ringkasan Keuangan Anda</h3>
+              <h3 className="font-semibold text-gray-800 lg:text-lg text-[15px]">Semua Ringkasan Keuangan Anda</h3>
             ) : month === "" && year !== "" ? (
-              <h3 className="font-semibold text-gray-800 text-lg">Ringkasan Keuangan Anda Tahun {year}</h3>
+              <h3 className="font-semibold text-gray-800 lg:text-lg text-[15px]">Ringkasan Keuangan Anda Tahun {year}</h3>
             ) : (
-              <h3 className="font-semibold text-gray-800 text-lg">
+              <h3 className="font-semibold text-gray-800 lg:text-lg text-[15px]">
                 Ringkasan Keuangan Anda Bulan {monthNames[month]} {new Date().getFullYear()}
               </h3>
             )}
@@ -186,17 +186,17 @@ const Dashboard = () => {
             <div className="bg-yellow-600 text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
               <img src={images[1]} className="lg:w-24 w-22 lg:h-24 h-22" alt="" />
               <h2 className="text-sm mt-2">Total Pemasukan</h2>
-              <p className="lg:text-2xl text-lg font-bold ">Rp {Number(summary?.income || 0).toLocaleString("id-ID")}</p>
+              <p className="lg:text-2xl text-base font-bold ">Rp {Number(summary?.income || 0).toLocaleString("id-ID")}</p>
             </div>
             <div className="bg-red-700 text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
               <img src={images[2]} className="lg:w-24 w-22 lg:h-24 h-22" alt="" />
               <h2 className="text-sm mt-2">Total Pengeluaran</h2>
-              <p className="lg:text-2xl text-lg font-bold ">Rp {Number(summary?.expense || 0).toLocaleString("id-ID")}</p>
+              <p className="lg:text-2xl text-base font-bold ">Rp {Number(summary?.expense || 0).toLocaleString("id-ID")}</p>
             </div>
             <div className="bg-green-600 text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
               <img src={images[3]} className="lg:w-22 w-22 lg:h-22  h-22" alt="" />
               <h2 className="text-sm mt-2">Balance</h2>
-              <p className="lg:text-2xl text-lg font-bold ">Rp {Number(summary?.balance || 0).toLocaleString("id-ID")}</p>
+              <p className="lg:text-2xl text-base font-bold ">Rp {Number(summary?.balance || 0).toLocaleString("id-ID")}</p>
             </div>
             <div
               className={`${
@@ -205,7 +205,7 @@ const Dashboard = () => {
             >
               <img src={summary?.income === 0 && summary?.expense === 0 ? images[10] : gradeImage} className="lg:w-20 w-16 lg:h-20 h-16" alt="grade emoticon" />
               <h2 className="text-sm mt-2">Status</h2>
-              <p className="text-lg font-bold text-center">{summary?.income === 0 && summary?.expense === 0 ? "Tidak Ada Transaksi" : grade}</p>
+              <p className="lg:text-lg font-bold text-center text-base">{summary?.income === 0 && summary?.expense === 0 ? "Tidak Ada Transaksi" : grade}</p>
             </div>
           </div>
         </div>
@@ -220,11 +220,11 @@ const Dashboard = () => {
           </div>
           <div className="text-gray-700 font-semibold mb-3">
             {month === "" && year === "" ? (
-              <p className="font-semibold text-gray-800 text-lg">Grafik Semua Keuangan Anda</p>
+              <p className="font-semibold text-gray-800 lg:text-lg text-[15px]">Grafik Semua Keuangan Anda</p>
             ) : month === "" && year !== "" ? (
-              <p className="font-semibold text-gray-800 text-lg">Grafik Keuangan Anda Tahun {year}</p>
+              <p className="font-semibold text-gray-800 lg:text-lg text-[15px]">Grafik Keuangan Anda Tahun {year}</p>
             ) : (
-              <p className="font-semibold text-gray-800 text-lg">
+              <p className="font-semibold text-gray-800 lg:text-lg text-[15px]">
                 Grafik Keuangan Anda Bulan {monthNames[month]} {new Date().getFullYear()}
               </p>
             )}
