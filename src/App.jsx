@@ -3,7 +3,6 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
-import { alertError } from "../src/lib/alert";
 
 const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false); // mobile
@@ -32,9 +31,6 @@ const AppLayout = () => {
     );
   }
 
-  if (!user && !loading) {
-    alertError("User tidak ditemukan");
-  }
   return (
     <div className="font-alan min-h-screen relative">
       {/* Sidebar */}
