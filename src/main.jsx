@@ -11,26 +11,38 @@ import Logout from "./pages/Logout.jsx";
 import Category from "./pages/Category.jsx";
 import DetailTransaction from "./pages/DetailTransaction.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
 
-        <Route path="/" element={<App />}>
-          <Route index element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="transaction" element={<Transaction />} />
-          <Route path="transaction-detail/:trxId" element={<DetailTransaction />} />
-          <Route path="print" element={<Dashboard />} />
-          <Route path="settings" element={<Dashboard />} />
-          <Route path="category" element={<Category />} />
-          {/* route not found */}
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* protected routes */}
+          <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <App />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<Dashboard />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="transaction" element={<Transaction />} />
+            <Route path="transaction-detail/:trxId" element={<DetailTransaction />} />
+            <Route path="print" element={<Dashboard />} />
+            <Route path="settings" element={<Dashboard />} />
+            <Route path="category" element={<Category />} />
+            {/* route not found */}
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>
 );
