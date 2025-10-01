@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Creepster&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Slab:wght@100..900&display=swap");
+
+@import "tailwindcss";
+
+.font-dor {
+  font-family: "Creepster", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+.font-alan {
+  font-family: "Alan Sans", sans-serif;
+}
+.font-loto {
+  font-family: "Lato", sans-serif;
+}
+.font-roboto {
+  font-family: "Roboto Slab", serif;
+}
+.shadow-nav {
+  box-shadow: 1px 1px 4px #00000080;
+}
+.shadow-ku {
+  box-shadow: 2px 2px 8px #00000080;
+}
+.active {
+  background-color: #fff;
+  color: rgb(0, 87, 0);
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+/* spiner */
+.custom-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #008b1e 94%, #0000) top/8px 8px no-repeat, conic-gradient(#0000 30%, #057205);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: s3 1s infinite linear;
+}
+
+@keyframes s3 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
