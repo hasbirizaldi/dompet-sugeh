@@ -146,13 +146,13 @@ const Category = () => {
   }, []);
   return (
     <div className="lg:p-6 space-y-6 mb-3">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Kategori</h1>
+      <h1 className="lg:text-2xl text-lg font-bold text-gray-800 mb-2">Kategori</h1>
 
       {/* Tabel Transaksi Terbaru */}
-      <div className="bg-white shadow-nav rounded-lg p-6 ">
+      <div className="bg-white shadow-nav rounded-lg lg:p-6 p-3 ">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-gray-700 font-semibold ">Semua Kategory</h2>
-          <button onClick={() => setShowModal(true)} className="flex justify-center items-center gap-1 bg-blue-600 text-white py-1.5 px-4 cursor-pointer hover:bg-blue-800 transition rounded-lg font-semibold">
+          <h2 className="text-gray-700 font-semibold lg:text-base text-sm ">Semua Kategory</h2>
+          <button onClick={() => setShowModal(true)} className="flex justify-center items-center gap-1 bg-blue-600 text-white py-1.5 px-3 cursor-pointer hover:bg-blue-800 transition rounded font-semibold text-xs lg:text-sm">
             <FaPlusCircle />
             Tambah Kategori
           </button>
@@ -162,42 +162,39 @@ const Category = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
               <tr className="bg-gray-50">
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
-                <th className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Aksi</th>
+                <th className="px-6 py-3 text-left lg:text-sm text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                <th className="px-3 py-3 text-left lg:text-sm text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
+                <th className="px-3 py-3  lg:text-sm text-xs font-medium text-gray-500 uppercase tracking-wider text-center">Aksi</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {loading ? (
                 <tr>
-                  <td colSpan="4" className="text-center py-4 text-gray-500">
+                  <td colSpan="3" className="text-center py-4 text-gray-500">
                     Memuat data...
                   </td>
                 </tr>
               ) : categories && categories.length > 0 ? (
                 categories.map((category, index) => (
-                  <tr key={category?.id || index} className="hover:bg-gray-50 transition">
-                    <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-
-                    <td className="px-6 py-4 whitespace-nowrap">{category?.name}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap capitalize ${category?.type === "income" ? "text-green-600" : "text-red-600"}`}>{category?.type === "income" ? "Pemasukan" : "Pengeluaran"}</td>
-                    <td className="px-6 py-4 whitespace-nowrap flex justify-center gap-4">
+                  <tr key={category?.id || index} className="hover:bg-gray-50 transition lg:text-base text-sm">
+                    <td className="px-3 py-4 whitespace-nowrap">{category?.name}</td>
+                    <td className={`px-3 py-4 whitespace-nowrap capitalize ${category?.type === "income" ? "text-green-600" : "text-red-600"}`}>{category?.type}</td>
+                    <td className="px-3 py-4 whitespace-nowrap flex justify-center lg:gap-4 gap-2">
                       <button
                         type="button"
                         onClick={() => handleEditClick(category)}
-                        className="font-semibold flex justify-center items-center gap-1 bg-green-600 text-white px-2 py-1.5 cursor-pointer shadow-nav rounded-lg hover:bg-green-700 transition text-sm"
+                        className="font-semibold flex justify-center items-center gap-1 bg-green-600 text-white px-1.5 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 transition text-sm"
                       >
-                        <MdEdit className="text-lg lg:block hidden" />
-                        Edit
+                        <MdEdit className="text-lg" />
+                        <span className=" lg:block hidden">Edit</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => deleteCategory(category.id)}
-                        className="font-semibold flex justify-center items-center gap-1 bg-red-600 text-white px-2 py-1.5 cursor-pointer shadow-nav rounded-lg hover:bg-red-700 transition text-sm"
+                        className="font-semibold flex justify-center items-center gap-1 bg-red-600 text-white px-1.5 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 transition text-sm"
                       >
-                        <MdDelete className="text-lg lg:block hidden" />
-                        Delete
+                        <MdDelete className="text-lg" />
+                        <span className="lg:block hidden">Delete</span>
                       </button>
                     </td>
                   </tr>
@@ -217,32 +214,36 @@ const Category = () => {
       {/* Modal Tambah Kategori */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 ">
-          <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm lg:max-w-xl">
-            <h3 className="text-2xl font-semibold mb-4">{isEditing ? "Edit kategory" : "Tambah Kategori"}</h3>
-            <form onSubmit={handleSubmitCategory} className="space-y-4">
+          <div className="w-[95%] bg-white lg:rounded-xl rounded-lg shadow-lg lg:p-8 p-6 max-w-sm lg:max-w-xl">
+            <h3 className="lg:text-2xl text-lg font-semibold mb-4">{isEditing ? "Edit kategory" : "Tambah Kategori"}</h3>
+            <form onSubmit={handleSubmitCategory} className="lg:space-y-4 space-y-2">
               <div>
-                <label className="block text-gray-700 text-base mb-1">Nama Kategori</label>
+                <label className="block text-gray-700 lg:text-base text-sm mb-1">Nama Kategori</label>
                 <input
                   type="text"
                   value={newCategory.name}
                   onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
                   required
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                  className="w-full border border-gray-300 rounded p-1 h-8 lg:h-10 focus:outline-none focus:ring-1 focus:ring-green-600"
                   placeholder="Masukkan nama kategori"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-base mb-1">Tipe</label>
-                <select value={newCategory.type} onChange={(e) => setNewCategory({ ...newCategory, type: e.target.value })} className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600">
+                <label className="block text-gray-700 lg:text-base text-sm mb-1">Tipe</label>
+                <select
+                  value={newCategory.type}
+                  onChange={(e) => setNewCategory({ ...newCategory, type: e.target.value })}
+                  className="w-full border border-gray-300 rounded p-1 h-8 lg:h-10 focus:outline-none focus:ring-1 focus:ring-green-600"
+                >
                   <option value="income">Pemasukan</option>
                   <option value="expense">Pengeluaran</option>
                 </select>
               </div>
               <div className="flex justify-end gap-3 mt-8">
-                <button type="button" onClick={resetForm} className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400 transition">
+                <button type="button" onClick={resetForm} className="bg-gray-300 text-gray-700 px-3 py-1 lg:px-4 lg:py-2 rounded cursor-pointer hover:bg-gray-400 transition">
                   Batal
                 </button>
-                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
+                <button type="submit" className="bg-blue-600 text-white px-3 lg:px-4 lg:py-2 py-1 rounded hover:bg-blue-700 transition cursor-pointer">
                   {isEditing ? "Update" : "Simpan"}
                 </button>
               </div>

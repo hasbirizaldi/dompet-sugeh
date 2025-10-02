@@ -18,12 +18,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       {/* Sidebar */}
       <div
         className={`fixed left-0 top-0 h-screen bg-green-800 shadow-nav z-30
-        transform transition-all duration-300 w-60
+        transform transition-all duration-300 w-60 
         ${sidebarOpen ? "translate-x-0 " : "-translate-x-full hidden "} 
         lg:translate-x-0`}
       >
         {/* Tombol collapse desktop */}
-        <div className="absolute right-0 top-[50%] bg-slate-100 rounded-l-full cursor-pointer hover:bg-white hover:scale-105 p-1  lg:block" onClick={toggleSidebar}>
+        <div className="absolute right-0 top-[50%] bg-slate-50 shadow-nav rounded-l-full cursor-pointer hover:bg-white hover:scale-105 p-1  lg:block" onClick={toggleSidebar}>
           <MdKeyboardDoubleArrowLeft className={`text-4xl text-green-800 transition-transform duration-300 `} />
         </div>
 
@@ -34,19 +34,19 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
 
         {/* Menu */}
         <div className="flex flex-col gap-3 font-semibold mt-5 text-white px-3 pr-14 ">
-          <NavLink className="flex items-center gap-2 text-[18px] p-2 rounded hover:bg-green-700" to="/">
+          <NavLink className="flex items-center gap-2 lg:text-[18px] text-base p-2 rounded hover:bg-green-700" to="/">
             <IoHome className="text-[20px]" />
             Dashboard
           </NavLink>
-          <NavLink className="flex items-center gap-2 text-[18px] p-2 rounded hover:bg-green-700" to="/profile">
+          <NavLink className="flex items-center gap-2 lg:text-[18px] text-base p-2 rounded hover:bg-green-700" to="/profile">
             <FaUser className="text-[20px]" />
             Profile
           </NavLink>
-          <NavLink className="flex items-center gap-2 text-[18px] p-2 rounded hover:bg-green-700" to="/transaction">
+          <NavLink className="flex items-center gap-2 lg:text-[18px] text-base p-2 rounded hover:bg-green-700" to="/transaction">
             <FaMoneyCheckAlt className="text-[20px]" />
             Transaksi
           </NavLink>
-          <NavLink className="flex items-center gap-2 text-[18px] p-2 rounded hover:bg-green-700" to="/category">
+          <NavLink className="flex items-center gap-2 lg:text-[18px] text-base p-2 rounded hover:bg-green-700" to="/category">
             <FaClipboardList className="text-[20px]" />
             Kategori
           </NavLink>

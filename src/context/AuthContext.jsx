@@ -36,7 +36,6 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
     fetchUser();
   }, []);
 

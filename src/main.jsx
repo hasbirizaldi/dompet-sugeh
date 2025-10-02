@@ -37,7 +37,6 @@ createRoot(document.getElementById("root")).render(
             <Route path="transaction" element={<Transaction />} />
             <Route path="transaction-detail/:trxId" element={<DetailTransaction />} />
             <Route path="print" element={<Dashboard />} />
-            <Route path="settings" element={<Dashboard />} />
             <Route path="category" element={<Category />} />
             {/* route not found */}
             <Route path="*" element={<NotFound />} />

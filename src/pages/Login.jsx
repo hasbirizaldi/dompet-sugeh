@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/img/assets";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import axios from "axios";
 import { alertError, alertSuccess } from "../lib/alert";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const [mode, setMode] = useState(true);
@@ -19,7 +20,13 @@ const Login = () => {
 
   // State error & loading
   const [loading, setLoading] = useState(false);
+  const { user, setUser } = useContext(AuthContext);
 
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [user, navigate]);
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -62,31 +69,19 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user_id", data.user.id);
 
-        // tampilkan alert **sebelum navigate**
-        if (mode) {
-          await alertSuccess("Anda berhasil masuk");
-        } else {
-          await alertSuccess("Pendaftaran anda berhasil");
-        }
+        setUser(data.user); // <-- ini penting supaya useEffect di Login.jsx jalan
 
-        // kemudian baru navigate
+        await alertSuccess(mode ? "Anda berhasil masuk" : "Pendaftaran anda berhasil");
+
         navigate("/", { replace: true });
-      } else {
-        await alertError("Terjadi kesalahan");
       }
     } catch (err) {
-      await alertError(err.response ? "Email atau password anda tidak valid!" : "Mumet");
+      await alertError(err.response ? "Email atau password anda tidak valid!" : "Terjadi kesalahan server");
     } finally {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("user_id");
-    if (token && userId) {
-      navigate("/", { replace: true }); // replace biar tidak bikin stack navigation
-    }
-  }, [navigate]);
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-slate-100">
       <div className="bg-white rounded-xl shadow-ku w-[95%] max-w-lg py-8 px-10">

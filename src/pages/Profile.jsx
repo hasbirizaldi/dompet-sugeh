@@ -77,7 +77,7 @@ const Profile = () => {
   return (
     <div className="lg:p-6 mb-3">
       {/* Header */}
-      <h1 className="text-2xl font-bold text-gray-700 mb-6">Profil Saya</h1>
+      <h1 className="lg:text-2xl text-lg font-bold text-gray-700 mb-2">Profil Saya</h1>
 
       <div className="bg-white shadow-ku rounded-xl p-6 flex flex-col md:flex-row gap-6">
         {/* Avatar */}

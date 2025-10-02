@@ -91,7 +91,7 @@ const Transaction = () => {
   const exportToExcel = async () => {
     try {
       // panggil endpoint export backend (tanpa paginate)
-      const response = await axios.get(`http://127.0.0.1:8000/api/transaction/${user.id}/export`, {
+      const response = await axios.get(`https://brewokode.space/api/transaction/${user.id}/export`, {
         params: {
           month: filterMonth,
           year: filterYear,
@@ -117,7 +117,7 @@ const Transaction = () => {
           Tanggal: new Date(trx.transaction_date).toLocaleDateString("id-ID"),
           Catatan: trx.notes || "-",
           Nominal: `Rp ${Number(trx.amount || 0).toLocaleString("id-ID")}`,
-          Jenis: trx.category_type === "income" ? "Pemasukan" : "Pengeluaran",
+          Jenis: trx.category.type === "income" ? "Pemasukan" : "Pengeluaran",
           Pembayaran: trx.payment_method === "cash" ? "Cash" : trx.payment_method === "bank_transfer" ? "Transfer Bank" : trx.payment_method === "e_wallet" ? "E-Walet" : trx.payment_method === "credit_card" ? "Credit Card" : "Debid Card",
         }))
       );
@@ -258,14 +258,14 @@ const Transaction = () => {
   }, []);
   return (
     <div className="lg:p-6 space-y-6 mb-3">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Transaksi</h1>
+      <h1 className="lg:text-2xl text-lg font-bold text-gray-800 mb-2">Transaksi</h1>
 
       {/* Tabel Transaksi Terbaru */}
-      <div className="bg-white shadow-nav rounded-lg lg:p-6 p-3">
+      <div className="bg-white shadow-nav rounded-lg lg:p-6 p-2">
         <div className="flex gap-5 flex-col justify-between">
           <div className="flex lg:flex-row flex-col lg:gap-2 gap-3 lg:mb-0 mb-4">
             <div>
-              <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-green-600">
+              <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full h-8  bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400">
                 <option value="all" className="">
                   Semua Transaksi
                 </option>
@@ -278,7 +278,7 @@ const Transaction = () => {
               </select>
             </div>
             <div>
-              <select value={filterMonth} onChange={(e) => setFilterMonth(e.target.value)} className="w-full bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-green-600">
+              <select value={filterMonth} onChange={(e) => setFilterMonth(e.target.value)} className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-ray-400">
                 <option value="">Bulan</option>
                 <option value="1">Januari</option>
                 <option value="2">Februari</option>
@@ -295,7 +295,7 @@ const Transaction = () => {
               </select>
             </div>
             <div>
-              <select value={filterYear} onChange={(e) => setFilterYear(e.target.value)} className="w-full bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-green-600">
+              <select value={filterYear} onChange={(e) => setFilterYear(e.target.value)} className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400">
                 <option value="">Tahun</option>
                 {Array.from({ length: 6 }, (_, i) => {
                   const year = new Date().getFullYear() + i;
@@ -315,7 +315,7 @@ const Transaction = () => {
                   setFilterType("all");
                   setSearch("");
                 }}
-                className="flex  justify-center items-center gap-1 w-full bg-gray-200 border cursor-pointer border-gray-300 rounded py-1 px-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="flex  justify-center items-center gap-1 w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400"
               >
                 <TbRefresh />
                 Reset
@@ -327,19 +327,22 @@ const Transaction = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Pencarian (Catatan/Nominal)"
-                className="lg:w-73 w-full border border-gray-300 rounded-lg p-1 focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="lg:w-73 w-full border border-gray-300 rounded-lg p-1 h-8 focus:outline-none focus:ring-1 focus:ring-gray-400"
               />
               <IoSearch className="absolute right-4 top-2 text-lg text-gray-500" />
             </div>
           </div>
           <div className="flex items-center lg:gap-4 gap-2 mb-4">
-            <button onClick={() => setShowModal(true)} className="flex justify-center items-center gap-1 bg-blue-600 text-white py-1.5 lg:px-4 px-3 cursor-pointer hover:bg-blue-800 transition rounded-lg font-semibold text-sm">
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex justify-center items-center h-8 gap-1 bg-blue-600 text-white py-1.5 lg:px-4 px-2 cursor-pointer hover:bg-blue-800 transition rounded font-semibold lg:text-sm text-[14px]"
+            >
               <FaPlusCircle />
               <span>Tambah Transaksi</span>
             </button>
             <div className="relative inline-block text-left">
               {/* Button */}
-              <button onClick={exportToExcel} className="flex items-center gap-1 bg-slate-600 text-white py-1.5 lg:px-4 px-3 rounded-lg font-semibold hover:bg-slate-700 transition cursor-pointer text-sm">
+              <button onClick={exportToExcel} className="flex items-center gap-1 h-8 bg-slate-600 text-white py-1.5 lg:px-4 px-2 rounded font-semibold hover:bg-slate-700 transition cursor-pointer lg:text-sm text-[14px]">
                 <FaFileExcel className="text-white" /> Export Excel
               </button>
             </div>
@@ -392,14 +395,14 @@ const Transaction = () => {
                         : "Kartu Debit"}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap flex gap-2 justify-center">
-                      <Link to={`/transaction-detail/${trx.id}`} className="font-semibold flex justify-center items-center gap-0.5 bg-gray-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded-lg hover:bg-gray-800 transition text-sm">
+                      <Link to={`/transaction-detail/${trx.id}`} className="font-semibold flex justify-center items-center gap-0.5 bg-gray-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-gray-800 transition text-sm">
                         <BiDetail className="text-base" />
                         Detail
                       </Link>
                       <button
                         onClick={() => handleEditClick(trx)}
                         type="button"
-                        className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded-lg hover:bg-green-700 transition text-sm"
+                        className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 transition text-sm"
                       >
                         <MdEdit className="text-base" />
                         Edit
@@ -407,7 +410,7 @@ const Transaction = () => {
                       <button
                         onClick={() => deleteTransaction(trx.id)}
                         type="button"
-                        className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded-lg hover:bg-red-700 transition text-sm"
+                        className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 transition text-sm"
                       >
                         <MdDelete className="text-base" />
                         Delete
@@ -507,14 +510,14 @@ const Transaction = () => {
               </div>
 
               <div className="flex gap-2 justify-end">
-                <Link to={`/transaction-detail/${trx.id}`} className="font-semibold flex justify-center items-center gap-0.5 bg-gray-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded-lg hover:bg-gray-800 transition text-sm">
+                <Link to={`/transaction-detail/${trx.id}`} className="font-semibold flex justify-center items-center gap-0.5 bg-gray-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-gray-800 transition text-sm">
                   <BiDetail className="text-base" />
                   Detail
                 </Link>
                 <button
                   onClick={() => handleEditClick(trx)}
                   type="button"
-                  className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded-lg hover:bg-green-700 transition text-sm"
+                  className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 transition text-sm"
                 >
                   <MdEdit className="text-base" />
                   Edit
@@ -522,7 +525,7 @@ const Transaction = () => {
                 <button
                   onClick={() => deleteTransaction(trx.id)}
                   type="button"
-                  className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded-lg hover:bg-red-700 transition text-sm"
+                  className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 transition text-sm"
                 >
                   <MdDelete className="text-base" />
                   Delete
@@ -538,7 +541,7 @@ const Transaction = () => {
 
         {!loading && meta && links.length > 0 && (
           <div className="justify-between items-center mt-4 lg:hidden flex">
-            <span className="text-sm text-gray-600">
+            <span className="text-[12px] text-gray-600 mt-5">
               Halaman {meta.current_page} dari {meta.last_page}
             </span>
             <div className="flex gap-2 mt-3">
@@ -563,7 +566,7 @@ const Transaction = () => {
                     key={i}
                     disabled={!link.url}
                     onClick={() => fetchTransactions(link.url)}
-                    className={`px-3 py-1 rounded text-sm transition cursor-pointer
+                    className={`px-2 py-0.5 rounded text-[12px] transition cursor-pointer
               ${link.active ? "bg-green-600 text-white font-semibold" : "bg-gray-200 hover:bg-gray-300"}
               ${!link.url ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
@@ -579,12 +582,12 @@ const Transaction = () => {
       {/* Modal Transaksi */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 ">
-          <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-sm lg:max-w-xl">
+          <div className="bg-white rounded-2xl shadow-lg lg:p-8 p-4 w-[95%] max-w-sm lg:max-w-xl">
             <h3 className="text-2xl font-semibold mb-4">{isEditing ? "Edit Transaksi" : "Transaksi Baru"}</h3>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-gray-700 text-base mb-1">Kategori</label>
-                <select name="category_id" value={form.category_id} onChange={handleChangeInput} className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                <select name="category_id" value={form.category_id} onChange={handleChangeInput} className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600" required>
                   <option value="">-- Pilih Kategori --</option>
                   {categories.map((category, index) => (
                     <option key={category.id || index} value={category.id}>
@@ -601,8 +604,8 @@ const Transaction = () => {
                   value={form.transaction_date}
                   onChange={handleChangeInput}
                   required
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
-                  placeholder="Masukkan nama kategori"
+                  className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                  placeholder="Masukan Tanggal Transaksi"
                 />
               </div>
               <div>
@@ -613,13 +616,13 @@ const Transaction = () => {
                   value={form.amount}
                   onChange={handleChangeInput}
                   required
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                  className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
                   placeholder="Masukkan nominal (Rp) "
                 />
               </div>
               <div>
                 <label className="block text-gray-700 text-base mb-1">Metode Pembayaran</label>
-                <select name="payment_method" value={form.payment_method} onChange={handleChangeInput} className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                <select name="payment_method" value={form.payment_method} onChange={handleChangeInput} className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600" required>
                   <option value="">-- Pilih Jenis Pembayaran --</option>
                   <option value="cash">Cash</option>
                   <option value="bank_transfer">Transfer Bank</option>

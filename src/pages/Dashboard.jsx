@@ -17,6 +17,7 @@ const Dashboard = () => {
 
   //   chart
   const [chartData, setChartData] = useState([]);
+  const [data, setData] = useState([]);
   const [chartType, setChartType] = useState("line");
 
   const token = localStorage.getItem("token");
@@ -98,6 +99,7 @@ const Dashboard = () => {
       });
 
       setChartData(response.data?.chart || []);
+      setData(response.data || []);
     } catch (err) {
       console.error("Gagal fetch chart:", err);
     }
@@ -107,9 +109,10 @@ const Dashboard = () => {
     fetchSummary();
     fetchChart();
   }, []);
+
   return (
     <div className="lg:p-6 space-y-6 mb-3">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Dashboard</h1>
+      <h1 className="lg:text-2xl text-lg font-bold text-gray-800 mb-2">Dashboard</h1>
       <div className="flex flex-col gap-3 bg-white shadow-md px-3 lg:px-4 pt-6 pb-10 rounded">
         {/* Kartu Statistik */}
         <div>
@@ -123,7 +126,7 @@ const Dashboard = () => {
                   fetchSummary(m, year);
                   fetchChart(m, year);
                 }}
-                className="w-full bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400"
               >
                 <option value="" className="bg-gray-400">
                   Bulan
@@ -144,7 +147,7 @@ const Dashboard = () => {
                   fetchSummary(month, y);
                   fetchChart(month, y);
                 }}
-                className="w-full bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="w-24 h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400"
               >
                 <option value="" className="bg-gray-400">
                   Tahun
@@ -164,7 +167,7 @@ const Dashboard = () => {
                   fetchSummary("", "");
                   fetchChart("", "");
                 }}
-                className="flex  justify-center items-center gap-1 w-full bg-gray-200 border cursor-pointer border-gray-300 rounded py-1 px-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="flex justify-center items-center gap-1 w-20 h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400"
               >
                 <TbRefresh />
                 Reset
@@ -183,44 +186,46 @@ const Dashboard = () => {
             )}
           </div>
           <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-5 gap-3 mb-2">
-            <div className="bg-yellow-600 text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
+            <div className="bg-green-600 text-slate-50 shadow-ku rounded-lg lg:p-4 p-2 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
               <img src={images[1]} className="lg:w-24 w-22 lg:h-24 h-22" alt="" />
-              <h2 className="text-sm mt-2">Total Pemasukan</h2>
+              <h2 className="lg:text-sm text-[12px] mt-2">Total Pemasukan</h2>
               <p className="lg:text-2xl text-base font-bold ">Rp {Number(summary?.income || 0).toLocaleString("id-ID")}</p>
             </div>
-            <div className="bg-red-700 text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
+            <div className="bg-red-700 text-slate-50 shadow-ku rounded-lg lg:p-4 p-2 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
               <img src={images[2]} className="lg:w-24 w-22 lg:h-24 h-22" alt="" />
-              <h2 className="text-sm mt-2">Total Pengeluaran</h2>
+              <h2 className="lg:text-sm text-[12px] mt-2">Total Pengeluaran</h2>
               <p className="lg:text-2xl text-base font-bold ">Rp {Number(summary?.expense || 0).toLocaleString("id-ID")}</p>
             </div>
-            <div className="bg-green-600 text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
+            <div className="bg-yellow-600 text-slate-50 shadow-ku rounded-lg lg:p-4 p-2 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer">
               <img src={images[3]} className="lg:w-22 w-22 lg:h-22  h-22" alt="" />
-              <h2 className="text-sm mt-2">Balance</h2>
+              <h2 className="lg:text-sm text-[12px] mt-2">Balance</h2>
               <p className="lg:text-2xl text-base font-bold ">Rp {Number(summary?.balance || 0).toLocaleString("id-ID")}</p>
             </div>
             <div
               className={`${
                 summary?.income === 0 && summary?.expense === 0 ? "bg-slate-800" : grade === "Keuangan Anda Payah" ? "bg-red-600" : grade === "Keuangan Anda Seimbang" ? "bg-yellow-600" : "bg-green-500"
-              } text-slate-50 shadow-ku rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer`}
+              } text-slate-50 shadow-ku rounded-lg lg:p-4 p-2 flex flex-col items-center justify-center hover:shadow-xl transition duration-300 cursor-pointer`}
             >
               <img src={summary?.income === 0 && summary?.expense === 0 ? images[10] : gradeImage} className="lg:w-20 w-16 lg:h-20 h-16" alt="grade emoticon" />
-              <h2 className="text-sm mt-2">Status</h2>
-              <p className="lg:text-lg font-bold text-center text-base">{summary?.income === 0 && summary?.expense === 0 ? "Tidak Ada Transaksi" : grade}</p>
+              <h2 className="lg:text-sm text-[12px] mt-2">Status</h2>
+              <p className="lg:text-lg font-bold text-center text-[14px]">{summary?.income === 0 && summary?.expense === 0 ? "Tidak Ada Transaksi" : grade}</p>
             </div>
           </div>
         </div>
-        <div className="my-4 w-full h-0.5 rounded-full  bg-gray-300"></div>
+        <div className="my-5 w-full h-0.5 rounded-full  bg-gray-300"></div>
         {/* Grafik */}
         <div>
-          <div className=" w-31 mb-6">
-            <select value={chartType} onChange={(e) => setChartType(e.target.value)} className="w-full bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-green-600">
-              <option value="bar">Grafik Bar</option>
-              <option value="line">Grafik Line</option>
-            </select>
+          <div className="flex gap-4">
+            <div className=" w-31 mb-6">
+              <select value={chartType} onChange={(e) => setChartType(e.target.value)} className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400">
+                <option value="bar">Grafik Bar</option>
+                <option value="line">Grafik Line</option>
+              </select>
+            </div>
           </div>
           <div className="text-gray-700 font-semibold mb-3">
             {month === "" && year === "" ? (
-              <p className="font-semibold text-gray-800 lg:text-lg text-[15px]">Grafik Semua Keuangan Anda</p>
+              <p className="font-semibold text-gray-800 lg:text-lg text-[15px]">Grafik Keuangan Anda Tahun {data.year}</p>
             ) : month === "" && year !== "" ? (
               <p className="font-semibold text-gray-800 lg:text-lg text-[15px]">Grafik Keuangan Anda Tahun {year}</p>
             ) : (
@@ -255,6 +260,24 @@ const Dashboard = () => {
                 </BarChart>
               </ResponsiveContainer>
             )}
+            <div className="grid grid-cols-2 w-[250px] lg:mt-0 mt-2 text-sm lg:text-base">
+              <div>
+                <div className="flex items-center gap-1">
+                  <div className={`h-3 w-3 bg-green-600 ${chartType === "line" ? "rounded-full" : ""}`}></div>Pemasukan
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className={`h-3 w-3 bg-red-600 ${chartType === "line" ? "rounded-full" : ""}`}></div>Pengeluaran
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="h-3 w-3 bg-transparent"></div>Balance
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center gap-1">: Rp {Number(data?.total_income || 0).toLocaleString("id-ID")}</div>
+                <div className="flex items-center gap-1">: Rp {Number(data?.total_expense || 0).toLocaleString("id-ID")}</div>
+                <div className="flex items-center gap-1">: Rp {Number(data?.balance || 0).toLocaleString("id-ID")}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

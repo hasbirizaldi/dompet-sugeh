@@ -1,13 +1,12 @@
 import { useState, useContext, useEffect } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
 
 const AppLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false); // mobile
-  const { user, loading } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { loading } = useContext(AuthContext);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
@@ -15,13 +14,6 @@ const AppLayout = () => {
     const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
     setSidebarOpen(isDesktop);
   }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!loading && (!user || !token)) {
-      navigate("/login");
-    }
-  }, [loading, user, navigate]);
 
   if (loading) {
     return (
@@ -43,7 +35,7 @@ const AppLayout = () => {
           <Outlet />
         </main>
       </div>
-      <footer className="absolute bottom-0 right-5 bg-transparent text-sm text-gray-500">
+      <footer className="absolute bottom-0 lg:right-5 right-1 bg-transparent lg:text-sm text-[12px] text-gray-500">
         © 2025 <Link to="/">Hasbi Rizaldi</Link>. All rights reserved.
       </footer>
     </div>

@@ -24,16 +24,24 @@ export default function Logout() {
         .then(() => {
           localStorage.removeItem("token");
           localStorage.removeItem("expires_at");
+          localStorage.removeItem("user_id");
           alertSuccess("Anda berhasil keluar");
-          navigate("/login");
+          setTimeout(() => {
+            navigate("/login", { replace: true });
+          }, 1000);
         })
         .catch(() => {
           localStorage.removeItem("token");
           localStorage.removeItem("expires_at");
-          navigate("/login");
+          localStorage.removeItem("user_id");
+          setTimeout(() => {
+            navigate("/login", { replace: true });
+          }, 1000);
         });
     } else {
-      navigate("/login");
+      setTimeout(() => {
+        navigate("/login", { replace: true });
+      }, 1000);
     }
   }, [navigate]);
 
