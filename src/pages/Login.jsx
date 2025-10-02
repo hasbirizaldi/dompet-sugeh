@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import images from "../assets/img/assets";
 import { IoMdEye } from "react-icons/io";
@@ -20,7 +20,7 @@ const Login = () => {
 
   // State error & loading
   const [loading, setLoading] = useState(false);
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   // useEffect(() => {
   //   if (user) {

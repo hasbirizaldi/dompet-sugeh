@@ -30,8 +30,8 @@ const Profile = () => {
       if (!["image/jpeg", "image/png", "image/jpg"].includes(f.type)) {
         return alertError("Format harus JPG/JPEG/PNG");
       }
-      if (f.size > 1024 * 1024) {
-        return alertError("Ukuran maksimal 1MB");
+      if (f.size > 2 * 1024 * 1024) {
+        return alertError("Ukuran maksimal 2MB");
       }
       setFile(f);
       setPreview(URL.createObjectURL(f));
@@ -145,7 +145,7 @@ const Profile = () => {
                 <label htmlFor="file-upload" className="cursor-pointer border-2 border-dashed border-gray-300 rounded-xl p-6 flex flex-col items-center justify-center text-gray-500 hover:border-green-600 hover:text-green-600 transition">
                   <FaUpload className="text-2xl mb-2" />
                   <span className="font-medium">Upload Foto Profil</span>
-                  <span className="text-sm text-gray-400 mt-1">PNG, JPG, JPEG maksimal 1MB</span>
+                  <span className="text-sm text-gray-400 mt-1">PNG, JPG, JPEG maksimal 2MB</span>
                 </label>
 
                 <input id="file-upload" type="file" name="image" accept="image/*" className="hidden" onChange={handleFileChange} />
