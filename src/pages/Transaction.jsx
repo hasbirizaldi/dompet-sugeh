@@ -258,14 +258,18 @@ const Transaction = () => {
   }, []);
   return (
     <div className="lg:p-6 space-y-6 mb-3">
-      <h1 className="lg:text-2xl text-lg font-bold text-gray-800 mb-2">Transaksi</h1>
+      <h1 className="lg:text-2xl text-lg font-bold text-gray-800 dark:text-slate-50 mb-2 transition-all duration-500">Transaksi</h1>
 
       {/* Tabel Transaksi Terbaru */}
-      <div className="bg-white shadow-nav rounded-lg lg:p-6 p-2">
+      <div className="bg-white dark:bg-slate-900 border-1 border-white dark:border-slate-300 shadow-nav rounded-lg lg:p-6 p-2 transition-all duration-500">
         <div className="flex gap-5 flex-col justify-between">
           <div className="flex lg:flex-row flex-col lg:gap-2 gap-3 lg:mb-0 mb-4">
             <div>
-              <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="w-full h-8  bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400">
+              <select
+                value={filterType}
+                onChange={(e) => setFilterType(e.target.value)}
+                className="w-full h-8  bg-gray-300 dark:bg-slate-950 text-slate-950 dark:text-slate-100  border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all duration-500"
+              >
                 <option value="all" className="">
                   Semua Transaksi
                 </option>
@@ -278,7 +282,11 @@ const Transaction = () => {
               </select>
             </div>
             <div>
-              <select value={filterMonth} onChange={(e) => setFilterMonth(e.target.value)} className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-ray-400">
+              <select
+                value={filterMonth}
+                onChange={(e) => setFilterMonth(e.target.value)}
+                className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 dark:bg-slate-950 text-slate-950 dark:text-slate-100 rounded p-1 focus:outline-none focus:ring-1 focus:ring-ray-400 transition-all duration-500"
+              >
                 <option value="">Bulan</option>
                 <option value="1">Januari</option>
                 <option value="2">Februari</option>
@@ -295,7 +303,11 @@ const Transaction = () => {
               </select>
             </div>
             <div>
-              <select value={filterYear} onChange={(e) => setFilterYear(e.target.value)} className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400">
+              <select
+                value={filterYear}
+                onChange={(e) => setFilterYear(e.target.value)}
+                className="w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 dark:bg-slate-950 text-slate-950 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all duration-500"
+              >
                 <option value="">Tahun</option>
                 {Array.from({ length: 6 }, (_, i) => {
                   const year = new Date().getFullYear() + i;
@@ -315,7 +327,7 @@ const Transaction = () => {
                   setFilterType("all");
                   setSearch("");
                 }}
-                className="flex  justify-center items-center gap-1 w-full h-8 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="flex  justify-center items-center gap-1 w-full h-8 dark:bg-slate-950 text-slate-950 dark:text-slate-100 bg-gray-200 border cursor-pointer border-gray-300 rounded p-1 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all duration-500"
               >
                 <TbRefresh />
                 Reset
@@ -327,7 +339,7 @@ const Transaction = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Pencarian (Catatan/Nominal)"
-                className="lg:w-73 w-full border border-gray-300 rounded-lg p-1 h-8 focus:outline-none focus:ring-1 focus:ring-gray-400"
+                className="lg:w-73 w-full border text-slate-950 dark:text-slate-100 border-gray-300 rounded-lg p-1 h-8 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-all duration-500"
               />
               <IoSearch className="absolute right-4 top-2 text-lg text-gray-500" />
             </div>
@@ -335,14 +347,17 @@ const Transaction = () => {
           <div className="flex items-center lg:gap-4 gap-2 mb-4">
             <button
               onClick={() => setShowModal(true)}
-              className="flex justify-center items-center h-8 gap-1 bg-blue-600 text-white py-1.5 lg:px-4 px-2 cursor-pointer hover:bg-blue-800 transition rounded font-semibold lg:text-sm text-[14px]"
+              className="flex justify-center items-center h-8 gap-1 bg-blue-600 dark:bg-blue-900 text-white dark:text-slate-100 py-1.5 lg:px-4 px-2 cursor-pointer hover:bg-blue-800 transition rounded font-semibold lg:text-sm text-[14px] transition-all duration-500"
             >
               <FaPlusCircle />
               <span>Tambah Transaksi</span>
             </button>
             <div className="relative inline-block text-left">
               {/* Button */}
-              <button onClick={exportToExcel} className="flex items-center gap-1 h-8 bg-slate-600 text-white py-1.5 lg:px-4 px-2 rounded font-semibold hover:bg-slate-700 transition cursor-pointer lg:text-sm text-[14px]">
+              <button
+                onClick={exportToExcel}
+                className="flex items-center gap-1 h-8 bg-slate-700 text-white dark:text-slate-100 py-1.5 lg:px-4 px-2 rounded font-semibold hover:bg-slate-500 transition cursor-pointer lg:text-sm text-[14px] transition-all duration-500"
+              >
                 <FaFileExcel className="text-white" /> Export Excel
               </button>
             </div>
@@ -351,39 +366,41 @@ const Transaction = () => {
         <div className="lg:block hidden overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
-              <tr className="bg-gray-50">
-                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catatan</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nominal</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis Transaksi</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"> Pembayaran</th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+              <tr className="bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 transition-all duration-500">
+                <th className="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider">#</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Tanggal</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Catatan</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Nominal</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Jenis Transaksi</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"> Pembayaran</th>
+                <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider">Aksi</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white dark:bg-slate-900 divide-y divide-gray-200 dark:divide-gray-600 transition-all duration-500">
               {loading ? (
                 <tr>
-                  <td colSpan="7" className="text-center py-4 text-gray-500">
+                  <td colSpan="7" className="text-center py-4 bg-white dark:bg-slate-900 text-gray-500 dark:text-slate-100">
                     Memuat data...
                   </td>
                 </tr>
               ) : transactions && transactions.length > 0 ? (
                 transactions.map((trx, index) => (
-                  <tr key={trx.id || index} className="hover:bg-gray-50 transition">
-                    <td className="px-2 py-4 whitespace-nowrap"> {(meta.current_page - 1) * meta.per_page + (index + 1)}</td>
+                  <tr key={trx.id || index} className="hover:bg-gray-50 dark:hover:bg-slate-800 transition">
+                    <td className="px-2 py-4 whitespace-nowrap text-slate-950 dark:text-slate-100"> {(meta.current_page - 1) * meta.per_page + (index + 1)}</td>
 
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-950 dark:text-slate-100">
                       {new Date(trx.transaction_date).toLocaleDateString("id-ID", {
                         day: "2-digit",
                         month: "short",
                         year: "numeric",
                       })}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap"> {trx?.notes ? (trx.notes && trx.notes.length > 20 ? trx.notes.slice(0, 20) + "..." : trx.notes) : "-"}</td>
-                    <td className="px-6 py-4 whitespace-nowrap"> Rp {Number(trx.amount || 0).toLocaleString("id-ID")}</td>
-                    <td className={`px-6 py-4 whitespace-nowrap font-semibold capitalize ${trx?.category_type === "income" ? "text-green-600" : "text-red-600"}`}>{trx?.category_type === "income" ? "Pemasukan" : "Pengeluaran"}</td>
-                    <td className="px-6 py-4 whitespace-nowrap capitalize">
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-950 dark:text-slate-100"> {trx?.notes ? (trx.notes && trx.notes.length > 20 ? trx.notes.slice(0, 20) + "..." : trx.notes) : "-"}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-slate-950 dark:text-slate-100"> Rp {Number(trx.amount || 0).toLocaleString("id-ID")}</td>
+                    <td className={`px-6 py-4 whitespace-nowrap font-semibold capitalize ${trx?.category_type === "income" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+                      {trx?.category_type === "income" ? "Pemasukan" : "Pengeluaran"}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap capitalize text-slate-950 dark:text-slate-100">
                       {trx.payment_method === "cash"
                         ? "Cash"
                         : trx.payment_method === "bank_transfer"
@@ -402,7 +419,7 @@ const Transaction = () => {
                       <button
                         onClick={() => handleEditClick(trx)}
                         type="button"
-                        className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 transition text-sm"
+                        className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 dark:bg-green-700 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 dark:hover:bg-green-800 transition text-sm"
                       >
                         <MdEdit className="text-base" />
                         Edit
@@ -410,7 +427,7 @@ const Transaction = () => {
                       <button
                         onClick={() => deleteTransaction(trx.id)}
                         type="button"
-                        className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 transition text-sm"
+                        className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 dark:bg-red-700 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 dark:hover:bg-red-800 transition text-sm"
                       >
                         <MdDelete className="text-base" />
                         Delete
@@ -455,7 +472,7 @@ const Transaction = () => {
                       disabled={!link.url}
                       onClick={() => fetchTransactions(link.url)}
                       className={`px-3 py-1 rounded text-sm transition cursor-pointer
-              ${link.active ? "bg-green-600 text-white font-semibold" : "bg-gray-200 hover:bg-gray-300"}
+              ${link.active ? "bg-blue-700 dark:bg-blue-900 text-white font-semibold" : "bg-gray-200 dark:bg-gray-400 hover:bg-gray-300"}
               ${!link.url ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {renderLabel}
@@ -473,11 +490,14 @@ const Transaction = () => {
           </div>
         ) : transactions && transactions.length > 0 ? (
           transactions.map((trx, index) => (
-            <div key={index} className={`${trx?.category_type === "income" ? "border-green-700 bg-green-50/80" : "border-red-700 bg-red-50/80"} lg:hidden w-full border-dashed border-2 shadow-lg rounded-lg p-4 mb-9`}>
+            <div
+              key={index}
+              className={`${trx?.category_type === "income" ? "border-green-700 bg-green-50/80 dark:bg-green-900/20" : "border-red-700 bg-red-50/80 dark:bg-red-900/20"} lg:hidden w-full border-dashed border-2 shadow-lg rounded-lg p-4 mb-9`}
+            >
               <div className="grid grid-cols-2 gap-x-0 gap-y-3">
                 <div>
-                  <div className="font-bold text-gray-700">Tanggal Transaksi</div>
-                  <div className="text-gray-900">
+                  <div className="font-bold text-gray-700 dark:text-slate-300">Tanggal Transaksi</div>
+                  <div className="text-gray-900 dark:text-slate-100">
                     {new Date(trx.transaction_date).toLocaleDateString("id-ID", {
                       day: "2-digit",
                       month: "short",
@@ -486,38 +506,41 @@ const Transaction = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-700">Metode Pembayaran</div>
-                  <div className="text-gray-900">
+                  <div className="font-bold text-gray-700 dark:text-slate-300">Metode Pembayaran</div>
+                  <div className="text-gray-900 dark:text-slate-100">
                     {trx.payment_method === "cash" ? "Cash" : trx.payment_method === "bank_transfer" ? "Transfer Bank" : trx.payment_method === "e_wallet" ? "E-Wallet" : trx.payment_method === "credit_card" ? "Kartu Kredit" : "Kartu Debit"}
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-700">Kategori</div>
-                  <dd className="text-gray-900">{trx?.category_name}</dd>
+                  <div className="font-bold text-gray-700 dark:text-slate-300">Kategori</div>
+                  <dd className="text-gray-900 dark:text-slate-100">{trx?.category_name}</dd>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-700">Jenis Transaksi</div>
-                  <div className="text-gray-900">{trx?.category_type === "income" ? "Pemasukan" : "Pengeluaran"}</div>
+                  <div className="font-bold text-gray-700 dark:text-slate-300">Jenis Transaksi</div>
+                  <div className="text-gray-900 dark:text-slate-100">{trx?.category_type === "income" ? "Pemasukan" : "Pengeluaran"}</div>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-700">Nominal</div>
-                  <div className="text-gray-900">Rp {Number(trx.amount || 0).toLocaleString("id-ID")}</div>
+                  <div className="font-bold text-gray-700 dark:text-slate-300">Nominal</div>
+                  <div className="text-gray-900 dark:text-slate-100">Rp {Number(trx.amount || 0).toLocaleString("id-ID")}</div>
                 </div>
               </div>
               <div className="my-4">
-                <div className="font-bold text-gray-700">Catatan</div>
-                <div className="text-gray-900">{trx?.notes}</div>
+                <div className="font-bold text-gray-700 dark:text-slate-300">Catatan</div>
+                <div className="text-gray-900 dark:text-slate-100">{trx?.notes}</div>
               </div>
 
               <div className="flex gap-2 justify-end">
-                <Link to={`/transaction-detail/${trx.id}`} className="font-semibold flex justify-center items-center gap-0.5 bg-gray-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-gray-800 transition text-sm">
+                <Link
+                  to={`/transaction-detail/${trx.id}`}
+                  className="font-semibold flex justify-center items-center gap-0.5 bg-gray-600 dark:bg-gray-800 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-gray-800 dark:hover:bg-gray-700 transition text-sm"
+                >
                   <BiDetail className="text-base" />
                   Detail
                 </Link>
                 <button
                   onClick={() => handleEditClick(trx)}
                   type="button"
-                  className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 transition text-sm"
+                  className="font-semibold flex justify-center items-center gap-0.5 bg-green-600 dark:bg-green-900 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-green-700 transition text-sm"
                 >
                   <MdEdit className="text-base" />
                   Edit
@@ -525,7 +548,7 @@ const Transaction = () => {
                 <button
                   onClick={() => deleteTransaction(trx.id)}
                   type="button"
-                  className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 transition text-sm"
+                  className="font-semibold flex justify-center items-center gap-0.5 bg-red-600 dark:bg-red-800 text-white px-2 py-1 cursor-pointer shadow-nav rounded hover:bg-red-700 dark:hover:bg-red-700 transition text-sm"
                 >
                   <MdDelete className="text-base" />
                   Delete
@@ -567,7 +590,7 @@ const Transaction = () => {
                     disabled={!link.url}
                     onClick={() => fetchTransactions(link.url)}
                     className={`px-2 py-0.5 rounded text-[12px] transition cursor-pointer
-              ${link.active ? "bg-green-600 text-white font-semibold" : "bg-gray-200 hover:bg-gray-300"}
+              ${link.active ? "bg-blue-700 dark:bg-blue-900 text-white font-semibold" : "bg-gray-200 dark:bg-gray-400 hover:bg-gray-300"}
               ${!link.url ? "opacity-50 cursor-not-allowed" : ""}`}
                   >
                     {renderLabel}
@@ -582,12 +605,18 @@ const Transaction = () => {
       {/* Modal Transaksi */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 ">
-          <div className="bg-white rounded-2xl shadow-lg lg:p-8 p-4 w-[95%] max-w-sm lg:max-w-xl">
-            <h3 className="text-2xl font-semibold mb-4">{isEditing ? "Edit Transaksi" : "Transaksi Baru"}</h3>
+          <div className="bg-white dark:bg-slate-900 border-1 border-white dark:border-slate-300 rounded-2xl shadow-lg lg:p-8 p-4 w-[95%] max-w-sm lg:max-w-xl">
+            <h3 className="text-2xl font-semibold mb-4 text-slate-950 dark:text-slate-100">{isEditing ? "Edit Transaksi" : "Transaksi Baru"}</h3>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
-                <label className="block text-gray-700 text-base mb-1">Kategori</label>
-                <select name="category_id" value={form.category_id} onChange={handleChangeInput} className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                <label className="block text-gray-700 dark:text-slate-100 text-base mb-1">Kategori</label>
+                <select
+                  name="category_id"
+                  value={form.category_id}
+                  onChange={handleChangeInput}
+                  className="w-full h-10 border border-gray-300 text-gray-700 dark:text-slate-100 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-700"
+                  required
+                >
                   <option value="">-- Pilih Kategori --</option>
                   {categories.map((category, index) => (
                     <option key={category.id || index} value={category.id}>
@@ -597,32 +626,38 @@ const Transaction = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-gray-700 text-base mb-1">Tanggal</label>
+                <label className="block text-gray-700 dark:text-slate-100 text-base mb-1">Tanggal</label>
                 <input
                   type="date"
                   name="transaction_date"
                   value={form.transaction_date}
                   onChange={handleChangeInput}
                   required
-                  className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                  className="w-full h-10 border border-gray-300 text-gray-700 dark:text-slate-100 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-700"
                   placeholder="Masukan Tanggal Transaksi"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-base mb-1">Nominal</label>
+                <label className="block text-gray-700 dark:text-slate-100 text-base mb-1">Nominal</label>
                 <input
                   type="number"
                   name="amount"
                   value={form.amount}
                   onChange={handleChangeInput}
                   required
-                  className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                  className="w-full h-10 border text-gray-700 dark:text-slate-100 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-700"
                   placeholder="Masukkan nominal (Rp) "
                 />
               </div>
               <div>
-                <label className="block text-gray-700 text-base mb-1">Metode Pembayaran</label>
-                <select name="payment_method" value={form.payment_method} onChange={handleChangeInput} className="w-full h-10 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600" required>
+                <label className="block text-gray-700 dark:text-slate-100 text-base mb-1">Metode Pembayaran</label>
+                <select
+                  name="payment_method"
+                  value={form.payment_method}
+                  onChange={handleChangeInput}
+                  className="w-full h-10 border text-gray-700 dark:text-slate-100 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-700"
+                  required
+                >
                   <option value="">-- Pilih Jenis Pembayaran --</option>
                   <option value="cash">Cash</option>
                   <option value="bank_transfer">Transfer Bank</option>
@@ -632,22 +667,22 @@ const Transaction = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-gray-700 text-base mb-1">Catatan</label>
+                <label className="block text-gray-700 dark:text-slate-100 text-base mb-1">Catatan</label>
                 <textarea
                   rows={4}
                   type="text"
                   name="notes"
                   value={form.notes}
                   onChange={handleChangeInput}
-                  className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-green-600"
+                  className="w-full border text-gray-700 dark:text-slate-100 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-700"
                   placeholder="Masukkan Catatan"
                 ></textarea>
               </div>
               <div className="flex justify-end gap-3 mt-8">
-                <button type="button" onClick={resetForm} className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400 transition">
+                <button type="button" onClick={resetForm} className="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-slate-100 px-4 py-2 rounded-lg cursor-pointer hover:bg-gray-400 dark:hover:bg-gray-500 transition">
                   Batal
                 </button>
-                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer">
+                <button type="submit" className="bg-blue-600 dark:bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition cursor-pointer">
                   {isEditing ? "Update" : "Simpan"}
                 </button>
               </div>

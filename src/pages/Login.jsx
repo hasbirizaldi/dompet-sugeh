@@ -83,20 +83,34 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-100">
-      <div className="bg-white rounded-xl shadow-ku w-[95%] max-w-lg py-8 px-10">
+    <div className="flex items-center justify-center min-h-screen bg-slate-100 dark:bg-slate-800">
+      <div className="bg-white dark:bg-slate-950 rounded-xl shadow-ku w-[95%] max-w-lg py-8 px-10">
         {/* Logo */}
-        <div className="flex justify-center">
-          <img src={images[0]} alt="Logo" className="w-30 h-30" />
+        <div className="flex justify-center mb-4">
+          <img src={images[0]} alt="Logo" className="lg:w-40 w-30 lg:h-10 h-7" />
         </div>
 
-        <h1 className="text-base text-center mb-4 mt-2 text-gray-500 font-semibold">{mode ? "Silahkan masuk dengan akun yang sudah didaftarkan" : "Silahkan daftarkan akun anda"}</h1>
+        <h1 className=" text-sm text-center mb-4 mt-2 text-gray-500 dark:text-gray-200 font-semibold">{mode ? "Silahkan masuk dengan akun yang sudah didaftarkan" : "Silahkan daftarkan akun anda"}</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {!mode && (
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Nama Lengkap" className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-600" required />
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Nama Lengkap"
+              className="w-full border border-gray-300 dark:border-gray-500 bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+              required
+            />
           )}
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-600" required />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className="w-full border border-gray-300 dark:border-gray-500 bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
+            required
+          />
 
           <div className="relative">
             <input
@@ -104,13 +118,13 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+              className="w-full border border-gray-300 dark:border-gray-500 bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
               required
             />
             {showPassword ? (
-              <IoMdEye className="text-gray-500 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
+              <IoMdEye className="text-gray-500 dark:text-gray-200 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
             ) : (
-              <IoMdEyeOff className="text-gray-500 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
+              <IoMdEyeOff className="text-gray-500 dark:text-gray-200 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
             )}
           </div>
 
@@ -121,26 +135,26 @@ const Login = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Konfirmasi Password"
-                className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+                className="w-full border border-gray-300 dark:border-gray-500 bg-white dark:bg-slate-900 text-gray-700 dark:text-gray-200 rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-blue-600"
                 required
               />
               {showPassword ? (
-                <IoMdEye className="text-gray-500 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
+                <IoMdEye className="text-gray-500 dark:text-gray-200 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
               ) : (
-                <IoMdEyeOff className="text-gray-500 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
+                <IoMdEyeOff className="text-gray-500 dark:text-gray-200 text-lg absolute right-4 top-3 cursor-pointer" onClick={togglePassword} />
               )}
             </div>
           )}
 
-          <button type="submit" disabled={loading} className="bg-green-600 text-white text-lg rounded-lg p-2 hover:bg-green-700 transition font-semibold cursor-pointer">
+          <button type="submit" disabled={loading} className="bg-blue-600 dark:bg-blue-900 text-white text-lg rounded-lg p-2 hover:bg-blue-950 dark:hover:bg-blue-800 transition font-semibold cursor-pointer">
             {mode ? "Masuk" : "Daftar"}
           </button>
         </form>
 
-        <div className="mt-4 text-center text-sm text-gray-500">
+        <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-200">
           {mode ? "Belum punya akun?" : "Sudah punya akun?"}
 
-          <span onClick={togglemode} className="ml-1 text-green-700 font-semibold cursor-pointer hover:underline">
+          <span onClick={togglemode} className="ml-1 text-blue-700 dark:text-blue-500 font-semibold cursor-pointer hover:underline">
             {mode ? "Daftar Sekarang" : "Masuk"}
           </span>
         </div>
